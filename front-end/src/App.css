@@ -1,47 +1,117 @@
+body {
+  background: linear-gradient(135deg, #f0f2f5, #e0e7ff);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-container {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  width: min(90vw, 450px);
+  max-width: 500px;
+  transition: transform 0.3s ease;
+}
+
+.game-container:hover {
+  transform: translateY(-5px);
+}
+
 #board {
   display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: #0288d1;
+  padding: 12px;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+#board.game-over {
+  opacity: 0.8;
 }
 
 .cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  height: 25vmin;
-  text-align: center;
+  background-color: #ffffff;
+  border: 3px solid #01579b;
+  padding: 0;
+  font-size: 3rem;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  color: #1a237e;
 }
 
-#bottombar {
-  height: 5vh;
+.cell.playable {
+  background-color: #e1f5fe;
+  cursor: pointer;
+}
+
+.cell.playable:hover {
+  background-color: #b3e5fc;
+  transform: scale(1.08);
+}
+
+.cell.winning {
+  background-color: #ffd740;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 #instructions {
-  height: 5vh;
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
+  background-color: #0288d1;
+  color: #ffffff;
+  padding: 15px;
+  margin-bottom: 20px;
   text-align: center;
-  border: 1px solid black;
+  font-size: 1.3rem;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#bottombar {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 #bottombar button {
-  width: 50%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
+  flex: 1;
+  padding: 14px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #0277bd;
+  color: #ffffff;
+  font-weight: 500;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+#bottombar button:hover:not(:disabled) {
+  background-color: #01579b;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.playable { background-color: red;}
+#bottombar button:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+  transform: none;
+}
